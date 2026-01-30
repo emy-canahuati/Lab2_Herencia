@@ -34,13 +34,18 @@ public class labHerencia extends JFrame {
         JButton btnAgregarTemporal = new JButton("Agregar Empleado Temporal");
         JButton btnAgregarVentas = new JButton("Agregar Empleado Ventas");
         JButton btnRegistrarHoras = new JButton("Registrar Horas");
+        JButton btnRegistrarVentas = new JButton("Registrar Ventas");
+        JButton btnActualizarContrato = new JButton("Actualizar Contrato");
+        JButton btnReporteEmpleados = new JButton("Reporte de Empleados");
 
 
         panelBotones.add(btnAgregarEstandar);
         panelBotones.add(btnAgregarTemporal);
         panelBotones.add(btnAgregarVentas);
         panelBotones.add(btnRegistrarHoras);
-
+        panelBotones.add(btnRegistrarVentas);
+        panelBotones.add(btnActualizarContrato);
+        panelBotones.add(btnReporteEmpleados);
 
         add(panelBotones, BorderLayout.WEST);
 
@@ -59,6 +64,18 @@ public class labHerencia extends JFrame {
         JPanel panelHoras = new JPanel();
         panelHoras.add(new JLabel("Registrar Horas Trabajadas"));
 
+        JPanel panelRegistrarVentas = new JPanel();
+        panelRegistrarVentas.add(new JLabel("Registrar Ventas"));
+
+        JPanel panelActualizarContrato = new JPanel();
+        panelActualizarContrato.add(new JLabel("Actualizar Fecha Fin Contrato"));
+
+        JPanel panelReporte = new JPanel();
+        panelReporte.add(new JLabel("Reporte de Empleados"));
+
+        panelCentral.add(panelRegistrarVentas, "REGISTRAR_VENTAS");
+        panelCentral.add(panelActualizarContrato, "ACTUALIZAR_CONTRATO");
+        panelCentral.add(panelReporte, "REPORTE");
         panelCentral.add(panelEstandar, "ESTANDAR");
         panelCentral.add(panelTemporal,"TEMPORAL");
         panelCentral.add(panelVentas, "VENTAS");
@@ -71,7 +88,9 @@ public class labHerencia extends JFrame {
         btnAgregarTemporal.addActionListener(e -> cardLayout.show(panelCentral, "TEMPORAL"));
         btnAgregarVentas.addActionListener(e -> cardLayout.show(panelCentral, "VENTAS"));
         btnRegistrarHoras.addActionListener(e -> cardLayout.show(panelCentral, "HORAS"));
-
+        btnRegistrarVentas.addActionListener(e -> cardLayout.show(panelCentral, "REGISTRAR_VENTAS"));
+        btnActualizarContrato.addActionListener(e -> cardLayout.show(panelCentral, "ACTUALIZAR_CONTRATO"));
+        btnReporteEmpleados.addActionListener(e -> cardLayout.show(panelCentral, "REPORTE"));
     }
 
 
