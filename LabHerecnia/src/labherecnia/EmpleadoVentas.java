@@ -10,31 +10,34 @@ package labherecnia;
  *
  * @author emyca
  */
-import java.time.LocalDateTime;
 public class EmpleadoVentas extends Empleados {
     protected double[] ventasMensuales;
     protected double tasaComision;
-    private int mesActual = LocalDateTime.now().getMonthValue()-1;
     
     public EmpleadoVentas(String codigoUnico, String nombre, double salarioBase){
         super(codigoUnico, nombre, salarioBase);
         this.ventasMensuales= new double[12];
     }
     
-    public void registroVentas(int mes,double venta){
-        ventasMensuales[mesActual]+=venta;
+    public void registroVentas(int mes, double venta){
+        if (mes >= 1 && mes <= 12) {
+            ventasMensuales[mes - 1] += venta;
+        }
     }
     
     public void setTasaComision(double tasaComision){
         this.tasaComision=tasaComision;
     }
     
-    public double calculoComision(){
-        return (ventasMensuales[mesActual]*tasaComision);
+    public double calculoComision(int mes){
+        if (mes >= 1 && mes <= 12) {
+            return (ventasMensuales[mes - 1] * tasaComision);
+        }
+        return 0;
     }
     
-    public double pagoMensual(){
-        double pago= (super.calcularPago()+calculoComision());
+    public double pagoMensual(int mes){
+        double pago= (super.calcularPago()+calculoComision(mes));
         return pago;
     }
     

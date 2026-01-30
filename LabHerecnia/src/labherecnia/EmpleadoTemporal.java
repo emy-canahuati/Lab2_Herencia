@@ -16,6 +16,7 @@ public class EmpleadoTemporal extends Empleados {
 
     EmpleadoTemporal(String codigoUnico, String nombre, double salarioBase) {
         super(codigoUnico, nombre, salarioBase);
+        this.finFechaContrato = Calendar.getInstance();
     }
 
     public Calendar getFinFechaContrato() {
@@ -27,8 +28,6 @@ public class EmpleadoTemporal extends Empleados {
     }
 
     public double calcularPago() {
-        double horasTrabajadas = 0;
-        double salario = 0;
         Calendar fechaActual = Calendar.getInstance();
         if (!fechaActual.after(finFechaContrato)) {
             return super.calcularPago();

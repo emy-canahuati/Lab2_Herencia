@@ -10,11 +10,14 @@
 <project name="LabHerecnia" default="default" basedir=".">
     <description>Builds, tests, and runs the project LabHerecnia.</description>
     <import file="nbproject/build-impl.xml"/>
-    <javac srcdir="src" destdir="build/classes" includeantruntime="false">
-        <classpath>
-            <pathelement location="libs/jcalendar-x.x.x.jar"/>
-        </classpath>
-    </javac>
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" includeantruntime="false">
+            <classpath>
+                <pathelement location="libs/jcalendar-1.4.jar"/>
+            </classpath>
+        </javac>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 

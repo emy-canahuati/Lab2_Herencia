@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 public class Empresa {
     ArrayList<Empleados> empleados= new ArrayList<Empleados>();
-    int mesActual = Calendar.getInstance().get(Calendar.MONTH)-1;
     public Empleados buscarEmpleado(String codigo) {
         for (Empleados e : empleados) {
             if (e.getCodigo().equals(codigo)) 
@@ -17,19 +16,26 @@ public class Empresa {
         return null;
     }
     
-    void registrarEmpleado(String tipoEmpleado, String codigoUnico,String nombre, double salarioBase ){
+    boolean registrarEmpleado(String tipoEmpleado, String codigoUnico,String nombre, double salarioBase ){
+      if (buscarEmpleado(codigoUnico) != null) {
+          return false;
+      }
       if(tipoEmpleado.equalsIgnoreCase("Estandar")){
          Empleados e= new Empleados(codigoUnico,nombre,salarioBase);
          empleados.add(e);
+         return true;
       }  
       else if(tipoEmpleado.equalsIgnoreCase("Temporal")){
         EmpleadoTemporal e= new EmpleadoTemporal(codigoUnico,nombre,salarioBase);
         empleados.add(e);
+        return true;
     }
       else if(tipoEmpleado.equalsIgnoreCase("Ventas")){
           EmpleadoVentas e =new EmpleadoVentas(codigoUnico,nombre,salarioBase);
           empleados.add(e);
+          return true;
       }
+      return false;
     }
     
       void registrarHoras(String codigo, double horas){
@@ -53,7 +59,7 @@ public class Empresa {
       
       double pagoMensual(Empleados empleado, int mesActual){
           if (empleado instanceof EmpleadoVentas){
-              return ((EmpleadoVentas) empleado).salarioBase+((EmpleadoVentas) empleado).calculoComision();
+              return ((EmpleadoVentas) empleado).salarioBase+((EmpleadoVentas) empleado).calculoComision(mesActual);
           }else if (empleado instanceof EmpleadoTemporal){
               return ((EmpleadoTemporal)empleado).calcularPago();
           } else{
@@ -72,9 +78,9 @@ public class Empresa {
           if (e instanceof EmpleadoVentas) {
             EmpleadoVentas ev = (EmpleadoVentas) e;
             
-            System.out.println("\nTipo de Empleado: Empleado Estandar"+
-                    "\nVentas del mes: " + ev.ventasMensuales.length);
-            System.out.println("Comisión: " + (ev.ventasMensuales.length * ev.tasaComision));
+            System.out.println("\nTipo de Empleado: Empleado Ventas"+
+                    "\nVentas anuales: " + ev.ventasAnuales());
+            System.out.println("Comisión mes actual: " + ev.calculoComision(Calendar.getInstance().get(Calendar.MONTH) + 1));
             ventas++;}
 
           else if (e instanceof EmpleadoTemporal) {
@@ -89,6 +95,7 @@ public class Empresa {
         }
           
       }
+      System.out.println("\nTotales -> Estándar: " + estandar + ", Temporal: " + temporal + ", Ventas: " + ventas);
       }
       
       

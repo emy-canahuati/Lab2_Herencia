@@ -35,5 +35,5 @@ public class Empleados {
                 "\nFecha de Contratacion: "
                 + fechaContratacion.get(Calendar.DAY_OF_MONTH) +"/"+ (fechaContratacion.get(Calendar.MONTH)+1)+"/"+fechaContratacion.get(Calendar.YEAR) ;
     }
-  
+
 }
