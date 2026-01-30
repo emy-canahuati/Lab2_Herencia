@@ -18,6 +18,9 @@ public class Empleados {
         this.salarioBase=salarioBase;
         fechaContratacion= Calendar.getInstance();
     }
+    String getCodigo(){
+        return codigoUnico;
+    }
     void registrarHorasTrabajadas(double horasSumadas){
         horasTrabajadas+= horasSumadas;
     }
