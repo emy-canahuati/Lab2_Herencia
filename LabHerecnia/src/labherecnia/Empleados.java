@@ -18,17 +18,17 @@ public class Empleados {
         this.salarioBase=salarioBase;
         fechaContratacion= Calendar.getInstance();
     }
-    void regisgtrarHorasTrabajadas(double horasSumadas){
-        horasTrabajadas= horasSumadas;
+    void registrarHorasTrabajadas(double horasSumadas){
+        horasTrabajadas+= horasSumadas;
     }
     double calcularPago(){
         return salarioBase*(horasTrabajadas/160);
     }
     
     String mostrarInformacion(){
-        return "Empleado: "+ nombre.toUpperCase()+
+        return "\nEmpleado: "+ nombre.toUpperCase()+
                 "\nIdentidad: "+ codigoUnico+ 
-                "Fecha de Contratacion: "
+                "\nFecha de Contratacion: "
                 + fechaContratacion.get(Calendar.DAY_OF_MONTH) +"/"+ (fechaContratacion.get(Calendar.MONTH)+1)+"/"+fechaContratacion.get(Calendar.YEAR) ;
     }
   
