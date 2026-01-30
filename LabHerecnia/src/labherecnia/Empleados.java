@@ -17,6 +17,7 @@ public class Empleados {
         this.nombre=nombre;
         this.salarioBase=salarioBase;
         fechaContratacion= Calendar.getInstance();
+        horasTrabajadas=0;
     }
     void registrarHorasTrabajadas(double horasSumadas){
         horasTrabajadas+= horasSumadas;
