@@ -1,15 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labherecnia;
 
-
-
-/**
- *
- * @author emyca
- */
 public class EmpleadoVentas extends Empleados {
     protected double[] ventasMensuales;
     protected double tasaComision;

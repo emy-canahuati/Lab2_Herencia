@@ -1,14 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labherecnia;
 import javax.swing.*;
 import java.awt.*;
-/**
- *
- * @author adria
- */
 public class registrarHorasPanel extends JPanel {
     private Empresa empresa;
     private JTextField txtCodigo;

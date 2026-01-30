@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labherecnia;
 
 import java.util.ArrayList;
@@ -14,6 +10,10 @@ public class Empresa {
                 return e;
         }
         return null;
+    }
+
+    public ArrayList<Empleados> obtenerEmpleados() {
+        return empleados;
     }
     
     boolean registrarEmpleado(String tipoEmpleado, String codigoUnico,String nombre, double salarioBase ){

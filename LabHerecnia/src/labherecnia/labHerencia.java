@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package labherecnia;
 
 import com.toedter.calendar.JCalendar;
@@ -9,10 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Calendar;
 
-/**
- *
- * @author adria
- */
 public class labHerencia extends JFrame {
     public Empresa empresa;
     public JPanel panelBotones;
@@ -125,11 +117,11 @@ public class labHerencia extends JFrame {
                 empresa,
                 () -> cardLayout.show(panelCentral, "ACTUALIZAR_CONTRATO")
         );
-
+        
+        panelCentral.add(panelAgregarEmpleados, "AGREGAR_EMPLEADOS");
         panelCentral.add(panelRegistrarVentas, "REGISTRAR_VENTAS");
         panelCentral.add(panelActualizarContrato, "ACTUALIZAR_CONTRATO");
         panelCentral.add(panelReporte, "REPORTE");
-        panelCentral.add(panelAgregarEmpleados, "AGREGAR_EMPLEADOS");
         panelCentral.add(panelHoras, "HORAS");
 
         add(panelCentral, BorderLayout.CENTER);

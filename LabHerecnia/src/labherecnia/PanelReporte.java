@@ -3,6 +3,8 @@ package labherecnia;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Objects;
 
 public class PanelReporte extends JPanel {
@@ -17,13 +19,18 @@ public class PanelReporte extends JPanel {
         JLabel lblCodigo = new JLabel("Código:");
         JTextField txtCodigo = new JTextField(15);
         JButton btnBuscar = new JButton("Buscar");
+        JButton btnReporteGeneral = new JButton("Reporte General");
         panelBuscar.add(new JLabel("Buscar Empleados por Código"));
         panelBuscar.add(lblCodigo);
         panelBuscar.add(txtCodigo);
         panelBuscar.add(btnBuscar);
+        panelBuscar.add(btnReporteGeneral);
 
         DefaultTableModel modelo = new DefaultTableModel(
-                new Object[]{"Código", "Nombre", "Tipo empleado", "Salario base"}, 0
+                new Object[]{
+                        "Código", "Nombre", "Tipo empleado", "Salario base", "Horas",
+                        "Fecha contratación", "Fin contrato", "Ventas anuales", "Comisión mes", "Pago mensual"
+                }, 0
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -49,12 +56,7 @@ public class PanelReporte extends JPanel {
                 return;
             }
             lblEstado.setText("Empleado encontrado.");
-            modelo.addRow(new Object[]{
-                    empleado.getCodigo(),
-                    empleado.nombre,
-                    tipoEmpleado(empleado),
-                    String.format("%.2f", empleado.salarioBase)
-            });
+            modelo.addRow(crearFilaEmpleado(empleado));
             empleadoSeleccionado[0] = empleado;
         });
 
@@ -128,12 +130,12 @@ public class PanelReporte extends JPanel {
                     return;
                 }
             }
-            // Refrescar la fila si existe
             int row = tablaResultados.getSelectedRow();
             if (row >= 0) {
-                modelo.setValueAt(empleado.nombre, row, 1);
-                modelo.setValueAt(tipoEmpleado(empleado), row, 2);
-                modelo.setValueAt(String.format("%.2f", empleado.salarioBase), row, 3);
+                Object[] fila = crearFilaEmpleado(empleado);
+                for (int i = 0; i < fila.length; i++) {
+                    modelo.setValueAt(fila[i], row, i);
+                }
             }
             lblEstado.setText("Información actualizada.");
         });
@@ -159,6 +161,24 @@ public class PanelReporte extends JPanel {
 
         btnActualizarContrato.addActionListener(e -> actualizarContratoHandler.run());
 
+        btnReporteGeneral.addActionListener(e -> {
+            modelo.setRowCount(0);
+            int estandar = 0;
+            int temporal = 0;
+            int ventas = 0;
+            for (Empleados emp : empresa.obtenerEmpleados()) {
+                modelo.addRow(crearFilaEmpleado(emp));
+                if (emp instanceof EmpleadoVentas) {
+                    ventas++;
+                } else if (emp instanceof EmpleadoTemporal) {
+                    temporal++;
+                } else {
+                    estandar++;
+                }
+            }
+            lblEstado.setText("Totales -> Estándar: " + estandar + ", Temporal: " + temporal + ", Ventas: " + ventas);
+        });
+
         add(panelBuscar, BorderLayout.NORTH);
         add(scrollResultado, BorderLayout.CENTER);
         JPanel panelInferior = new JPanel(new BorderLayout());
@@ -175,6 +195,41 @@ public class PanelReporte extends JPanel {
             return "Temporal";
         }
         return "Estándar";
+    }
+
+    private Object[] crearFilaEmpleado(Empleados empleado) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaContratacion = empleado.fechaContratacion != null
+                ? sdf.format(empleado.fechaContratacion.getTime())
+                : "";
+        String finContrato = "";
+        String ventasAnuales = "";
+        String comisionMes = "";
+        int mesActual = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        if (empleado instanceof EmpleadoTemporal) {
+            Calendar fin = ((EmpleadoTemporal) empleado).getFinFechaContrato();
+            if (fin != null) {
+                finContrato = sdf.format(fin.getTime());
+            }
+        }
+        if (empleado instanceof EmpleadoVentas) {
+            EmpleadoVentas ev = (EmpleadoVentas) empleado;
+            ventasAnuales = String.format("%.2f", ev.ventasAnuales());
+            comisionMes = String.format("%.2f", ev.calculoComision(mesActual));
+        }
+        String pagoMensual = String.format("%.2f", empresa.pagoMensual(empleado, mesActual));
+        return new Object[]{
+                empleado.getCodigo(),
+                empleado.nombre,
+                tipoEmpleado(empleado),
+                String.format("%.2f", empleado.salarioBase),
+                String.format("%.2f", empleado.horasTrabajadas),
+                fechaContratacion,
+                finContrato,
+                ventasAnuales,
+                comisionMes,
+                pagoMensual
+        };
     }
 
 }
