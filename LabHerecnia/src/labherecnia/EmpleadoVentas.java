@@ -12,8 +12,8 @@ package labherecnia;
  */
 import java.time.LocalDateTime;
 public class EmpleadoVentas extends Empleados {
-    private double[] ventasMensuales;
-    private double tasaComision;
+    protected double[] ventasMensuales;
+    protected double tasaComision;
     private int mesActual = LocalDateTime.now().getMonthValue()-1;
     
     public EmpleadoVentas(String codigoUnico, String nombre, double salarioBase){
