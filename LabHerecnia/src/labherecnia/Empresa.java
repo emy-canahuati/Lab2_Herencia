@@ -26,16 +26,19 @@ public class Empresa {
         
     }
       else if(tipoEmpleado.equalsIgnoreCase("Ventas")){
-          EmpleadosVenta e =new EmpleadosVenta();
+          EmpleadoVenta e =new EmpleadoVenta();
       }
       else{
           System.out.println("¡Tipo empleado invalido! ");
       }
-
+    }
       void registrarHoras(String codigo, double horas){
           Empleados e = buscarEmpleado(codigo);
         if (e != null) {
             e.registrarHorasTrabajadas(horas);
         }
+      }
+      void registrarVentas(String codigo, int ventas){
+          Empleados emp= buscarEmpleado(codigo);
       }
 }
