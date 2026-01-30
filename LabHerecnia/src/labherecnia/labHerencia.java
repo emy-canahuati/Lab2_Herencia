@@ -52,8 +52,7 @@ public class labHerencia extends JFrame {
         JPanel panelAgregarEmpleados = new JPanel();
         panelAgregarEmpleados.add(new JLabel("Agregar Empleados"));
 
-        JPanel panelHoras = new JPanel();
-        panelHoras.add(new JLabel("Registrar Horas Trabajadas"));
+        JPanel panelHoras = new registrarHorasPanel(empresa);
 
         JPanel panelRegistrarVentas = new JPanel();
         panelRegistrarVentas.add(new JLabel("Registrar Ventas"));
