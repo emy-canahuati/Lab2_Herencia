@@ -11,11 +11,12 @@ package labherecnia;
  * @author emyca
  */
 import java.time.LocalDateTime;
-public class EmpleadosVentas {
+public class EmpleadoVentas extends Empleados {
     private double[] ventasMensuales;
     private double tasaComision;
     
-    public EmpleadosVentas(){
+    public EmpleadoVentas(String codigoUnico, String nombre, double salarioBase){
+        super(codigoUnico, nombre, salarioBase);
         this.ventasMensuales= new double[12];
     }
     
@@ -32,9 +33,25 @@ public class EmpleadosVentas {
         return (ventasMensuales[mes]*tasaComision);
     }
     
-    
+    public double pagoMensual(int mesActual){
+        double pago= (super.calcularPago()+calculoComision(mesActual));
+        return pago;
+    }
     
     public double ventasAnuales(){
-        
+        return ventasAnuales(0);
     }
+    
+    private double ventasAnuales(int index){
+        if (index<12){
+            return ventasAnuales(index+1)+ventasMensuales[index];
+        }
+        return 0;
+    }
+    
+    String mostrarInformacion(){
+        return super.mostrarInformacion()+"\nVentas Anuales: L."+ventasAnuales();
+    }
+
+
 }
