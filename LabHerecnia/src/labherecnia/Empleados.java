@@ -19,6 +19,9 @@ public class Empleados {
         fechaContratacion= Calendar.getInstance();
         horasTrabajadas=0;
     }
+    String getCodigo(){
+        return codigoUnico;
+    }
     void registrarHorasTrabajadas(double horasSumadas){
         horasTrabajadas+= horasSumadas;
     }
