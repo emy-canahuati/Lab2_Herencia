@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class EmpleadoVentas extends Empleados {
     private double[] ventasMensuales;
     private double tasaComision;
+    private int mesActual = LocalDateTime.now().getMonthValue()-1;
     
     public EmpleadoVentas(String codigoUnico, String nombre, double salarioBase){
         super(codigoUnico, nombre, salarioBase);
@@ -21,7 +22,6 @@ public class EmpleadoVentas extends Empleados {
     }
     
     public void registroVentas(int mes,double venta){
-        int mesActual = LocalDateTime.now().getMonthValue()-1;
         ventasMensuales[mesActual]+=venta;
     }
     
@@ -29,12 +29,12 @@ public class EmpleadoVentas extends Empleados {
         this.tasaComision=tasaComision;
     }
     
-    public double calculoComision(int mes){
-        return (ventasMensuales[mes]*tasaComision);
+    public double calculoComision(){
+        return (ventasMensuales[mesActual]*tasaComision);
     }
     
-    public double pagoMensual(int mesActual){
-        double pago= (super.calcularPago()+calculoComision(mesActual));
+    public double pagoMensual(){
+        double pago= (super.calcularPago()+calculoComision());
         return pago;
     }
     
