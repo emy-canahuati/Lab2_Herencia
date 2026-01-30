@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 public class Empresa {
     ArrayList<Empleados> empleados= new ArrayList<Empleados>();
-    int mesActual = Calendar.getInstance().get(Calendar.MONTH)-1;
+    
     public Empleados buscarEmpleado(String codigo) {
         for (Empleados e : empleados) {
             if (e.getCodigo().equals(codigo)) 
@@ -50,16 +50,6 @@ public class Empresa {
               ((EmpleadoTemporal) emp).setFinFechaContrato(nuevaFechaFinContrato);
           }
       }
-      
-      double pagoMensual(Empleados empleado, int mesActual){
-          if (empleado instanceof EmpleadoVentas){
-              return ((EmpleadoVentas) empleado).salarioBase+((EmpleadoVentas) empleado).calculoComision();
-          }else if (empleado instanceof EmpleadoTemporal){
-              return ((EmpleadoTemporal)empleado).calcularPago();
-          } else{
-                return empleado.calcularPago()-(empleado.calcularPago()*0.035);
-          }
-      }
       void generarReporte(){
           int estandar=0;
           int temporal=0;
@@ -90,6 +80,4 @@ public class Empresa {
           
       }
       }
-      
-      
 }
