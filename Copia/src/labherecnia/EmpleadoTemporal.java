@@ -12,7 +12,7 @@ import java.util.Calendar;
  * @author palma
  */
 public class EmpleadoTemporal extends Empleados {
-    protected Calendar finFechaContrato;
+    Calendar finFechaContrato;
 
     EmpleadoTemporal(String codigoUnico, String nombre, double salarioBase) {
         super(codigoUnico, nombre, salarioBase);

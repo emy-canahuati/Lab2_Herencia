@@ -12,8 +12,8 @@ package labherecnia;
  */
 import java.time.LocalDateTime;
 public class EmpleadoVentas extends Empleados {
-    protected double[] ventasMensuales;
-    protected double tasaComision;
+    double[] ventasMensuales;
+    double tasaComision;
     
     public EmpleadoVentas(String codigoUnico, String nombre, double salarioBase){
         super(codigoUnico, nombre, salarioBase);
